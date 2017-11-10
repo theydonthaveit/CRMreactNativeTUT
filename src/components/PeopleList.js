@@ -28,7 +28,7 @@ class PeopleList extends Component<{}> {
       rowHasChanged: (r1, r2) => r1 != r2
     })
 
-    this.dataSource = ds.cloneWithRows(this.state.people)
+    this.dataSource = ds.cloneWithRows(this.props.people)
   }
 
   render() {
@@ -38,9 +38,9 @@ class PeopleList extends Component<{}> {
           <ListView
             enableEmptySections={true}
             dataSource={this.dataSource}
-            renderRow={(rowData) => {
+            renderRow={(rowData) =>
               <PeopleItem people={rowData} />
-            }} />
+            } />
         </View>
     );
   }
@@ -51,4 +51,5 @@ const mapStateToProps = (state) => {
     people: state.people
   }
 }
+
 export default connect(mapStateToProps)(PeopleList)

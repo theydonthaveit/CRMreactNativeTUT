@@ -37,7 +37,7 @@ const PeopleItem = (props) => {
         <View
             style={[theme.cardStyle, styles.card]} >
             <Image
-                source={{uri: 'http://www.planwallpaper.com/static/images/abstract-colourful-cool-wallpapers-55ec7905a6a4f.jpg'}}
+                source={{uri: 'http://cdn.pcwallart.com/images/light-blue-background-wallpaper-1.jpg'}}
                 style={[theme.cardImageStyle, styles.image]} />
             <Icon
                 name={'user'}

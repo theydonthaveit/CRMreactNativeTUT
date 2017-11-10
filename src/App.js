@@ -1,15 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import firebase from 'firebase'
@@ -19,14 +9,12 @@ import reducers from './reducers/PeopleReducer'
 
 // own components
 import Login from './components/Login'
-import PeopleList from './components/PeopleList'
 import Loader from './components/Loader'
+import Navigation from './components/Navigation'
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   }
 });
@@ -63,7 +51,7 @@ export default class App extends Component<{}> {
   renderInitialView() {
     switch(this.state.loggedIn) {
       case true:
-        return <PeopleList />
+        return <Navigation />
       case false:
         return <Login />
       default:

@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  ListView
-} from 'react-native';
+import { StyleSheet, Text, View, ListView } from 'react-native';
 import { connect } from 'react-redux'
 import PeopleItem from './PeopleItem'
+import Icon from 'react-native-vector-icons/EvilIcons'
 
-const { height, width } = Dimensions.get('window')
-const formWidth = (width/10)*9
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: formWidth,
+    width: 380,
     flexWrap: 'wrap',
     paddingTop: 20,
-    paddingLeft: 20
+    paddingLeft: 30
   }
 });
 
 class PeopleList extends Component<{}> {
+  static navigationOptions = {
+      tabBarLabel: 'People',
+      tabBarIcon: ({ tintColor }) => (
+              <Icon
+                  name={'user'}
+                  size={50}
+                  style={{color: tintColor}} />
+          )
+  }
+
   componentWillMount() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 != r2

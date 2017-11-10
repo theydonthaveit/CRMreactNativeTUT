@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     form: {
+        flex: 1,
         paddingBottom: 10,
         width: formWidth
     },

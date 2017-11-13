@@ -8,12 +8,18 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type) {
-        case 'SELECTED_PERSON': {
+        case 'SELECTED_PERSON':
             return {
                 ...state,
-                detailView
+                detailView: true,
+                personSelected: action.payload
             }
-        }
+        case 'NONE_SELECTED':
+            return {
+                ...state,
+                detailView: false,
+                personSelected: null
+            }
         default:
             return state
     }

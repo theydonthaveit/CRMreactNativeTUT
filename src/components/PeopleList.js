@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ListView } from 'react-native';
 import { connect } from 'react-redux'
 import PeopleItem from './PeopleItem'
+import PeopleDetail from './PeopleDetail'
 import Icon from 'react-native-vector-icons/EvilIcons'
 
 
@@ -26,24 +27,34 @@ class PeopleList extends Component<{}> {
           )
   }
 
-  componentWillMount() {
+  renderInitialView() {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 != r2
     })
 
     this.dataSource = ds.cloneWithRows(this.props.people)
+
+    if ( this.props.detailView === true ) {
+      return (
+        <PeopleDetail />        
+      )    
+    }
+    else {
+      return ( <ListView
+        enableEmptySections={true}
+        dataSource={this.dataSource}
+        renderRow={(rowData) =>
+          <PeopleItem people={rowData} />
+        } />
+      )
+    }
   }
 
   render() {
     return (
         <View
           style={styles.container} >
-          <ListView
-            enableEmptySections={true}
-            dataSource={this.dataSource}
-            renderRow={(rowData) =>
-              <PeopleItem people={rowData} />
-            } />
+          {this.renderInitialView()}
         </View>
     );
   }
@@ -51,7 +62,8 @@ class PeopleList extends Component<{}> {
 
 const mapStateToProps = (state) => {
   return {
-    people: state.people
+    people: state.people,
+    detailView: state.detailView
   }
 }
 

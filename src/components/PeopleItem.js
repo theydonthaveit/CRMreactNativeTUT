@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 const PeopleItem = (props) => {
     return (
         <TouchableWithoutFeedback
-            onPress={() => prop.selectPerson(people)} >
+            onPress={() => props.selectPerson(props.people)} >
             <View
                 style={[theme.cardStyle, styles.card]} >
                 <Image

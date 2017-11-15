@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase'
-
+import Thunk from 'redux-thunk'
 // own states
 import reducers from './reducers/PeopleReducer'
 
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(Thunk))
 
 export default class App extends Component<{}> {
   state = {

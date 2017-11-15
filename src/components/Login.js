@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     },
     form: {
         flex: 1,
+        justifyContent: 'center',
+        paddingLeft: 70,
         paddingBottom: 10,
         width: formWidth
     },

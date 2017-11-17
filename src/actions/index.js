@@ -46,3 +46,42 @@ export const loadInitialContacts = () => {
             })
     }
 }
+
+export const deleteContact = (uid) => {
+    const { currentUser } = firebase.auth()
+    
+    return (dispatch) => {
+        firebase
+            .database()
+            .ref(`/users/${currentUser.uid}/people/${uid}`)
+            .remove()
+            .then(() => {
+                dispatch({
+                    type: 'DELETE_CONTACT'
+                })
+            })
+    }
+}
+
+export const updateContact = (personSelected) => {
+    return {
+        type: 'UPDATE_CONTACT',
+        payload: personSelected
+    }
+}
+
+export const saveContact = ({ first_name, last_name, phone, email, company, project, notes, uid }) => {
+    const { currentUser } = firebase.auth()
+    
+    return (dispatch) => {
+        firebase
+            .database()
+            .ref(`/users/${currentUser.uid}/people/${uid}`)
+            .set({ first_name, last_name, phone, email, company, project, notes })
+            .then(() => {
+                dispatch({
+                    type: 'SAVE_CONTACT'
+                })
+            })
+    }
+}

@@ -29,8 +29,8 @@ class PeopleList extends Component<{}> {
           )
   }
 
-  componentWillMount() {
-    this.props.loadInitialContacts
+  componentDidMount() {
+    this.props.loadInitialContacts()
   }
 
   renderInitialView() {
@@ -69,7 +69,8 @@ class PeopleList extends Component<{}> {
 const mapStateToProps = (state) => {
   const people = _.map(state.people, (val, uid) => {
     return {
-      ...val, uid
+      ...val,
+      uid
     }
   })
 
@@ -79,4 +80,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(PeopleList)
+export default connect(mapStateToProps, {loadInitialContacts})(PeopleList)

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ListView } from 'react-native';
 import { connect } from 'react-redux'
+import { loadInitialContacts } from '../actions'
+import _ from 'lodash'
 import PeopleItem from './PeopleItem'
 import PeopleDetail from './PeopleDetail'
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -25,6 +27,10 @@ class PeopleList extends Component<{}> {
                   size={50}
                   style={{color: tintColor}} />
           )
+  }
+
+  componentWillMount() {
+    this.props.loadInitialContacts
   }
 
   renderInitialView() {
@@ -61,8 +67,14 @@ class PeopleList extends Component<{}> {
 }
 
 const mapStateToProps = (state) => {
+  const people = _.map(state.people, (val, uid) => {
+    return {
+      ...val, uid
+    }
+  })
+
   return {
-    people: state.people,
+    people,
     detailView: state.detailView
   }
 }

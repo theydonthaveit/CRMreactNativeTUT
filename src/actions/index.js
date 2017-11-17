@@ -13,10 +13,10 @@ export const noneSelected = () => {
     }
 }
 
-export const formUpdate = ({props, value}) => {
+export const formUpdate = ({prop, value}) => {
     return {
         type: 'FORM_UPDATE',
-        payload: { props, value }
+        payload: { prop, value }
     }
 }
 
@@ -24,6 +24,25 @@ export const createNewContact = ({ first_name, last_name, phone, email, company,
     const { currentUser } = firebase.auth()
 
     return (dispatch) => {
-        firebase.database().ref(`/users/${currentUser.uid}/people`)
+        firebase
+            .database()
+            .ref(`/users/${currentUser.uid}/people`)
+            .push({ first_name, last_name, phone, email, company, project, notes })
+            .then(() => {
+                dispatch({ type: 'NEW_CONTACT' })
+            })
+    }
+}
+
+export const loadInitialContacts = () => {
+    const { currentUser } = firebase.auth()
+    
+    return (dispatch) => {
+        firebase
+            .database()
+            .ref(`/users/${currentUser.uid}/people`)
+            .on('value', snapshot => {
+                dispatch({ type: 'INITIAL_FETCH', payload: snapshot.val() })
+            })
     }
 }
